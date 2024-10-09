@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LayoutPrincipal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/rg_grupo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <RadioButton
+                android:id="@+id/rb_opcion1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/rb_eleccion1" />
+
+            <RadioButton
+                android:id="@+id/rb_opcion2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rb_eleccion2" />
+
+            <RadioButton
+                android:id="@+id/rb_opcion3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rb_eleccion3" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/sp_elementos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp" />
+
+</LinearLayout>
