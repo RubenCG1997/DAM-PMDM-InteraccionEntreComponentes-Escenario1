@@ -1,7 +1,9 @@
 package com.iescamas.escenario1;
 
 import android.os.Bundle;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
@@ -13,44 +15,39 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    RadioGroup rg_opciones;
-    Spinner sp;
-    ArrayAdapter<CharSequence> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rg_opciones = findViewById(R.id.rg_grupo);
-        sp = findViewById(R.id.sp_elementos);
-
-        //Arracamos el spinner con las opciones de fútbol
-        adapter = ArrayAdapter.createFromResource(this,R.array.Opciones1,android.R.layout.simple_spinner_item);
-        //Se especifica el layout con el que empieza
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //Se asigna el adaptador al spinner
-        sp.setAdapter(adapter);
+        int btnSeleccionado = ((RadioGroup) findViewById(R.id.rg_grupo)).getCheckedRadioButtonId();
+        if(btnSeleccionado!=-1){
+            eligeArray(btnSeleccionado);
+        }
 
         //Cambio de boton mediante el grupo
-        rg_opciones.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if(i == R.id.rb_opcion1){
-
-                    adapter = ArrayAdapter.createFromResource(MainActivity.this,R.array.Opciones1,android.R.layout.simple_spinner_item);
-
-                } else if (i == R.id.rb_opcion2) {
-
-                    adapter = ArrayAdapter.createFromResource(MainActivity.this,R.array.Opciones2,android.R.layout.simple_spinner_item);
-                }
-                else{
-
-                    adapter = ArrayAdapter.createFromResource(MainActivity.this,R.array.Opciones3,android.R.layout.simple_spinner_item);
-                }
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                sp.setAdapter(adapter);
-            }
+        ((RadioGroup) findViewById(R.id.rg_grupo)).setOnCheckedChangeListener((RadioGroup.OnCheckedChangeListener) (radioGroup, i) -> {
+            eligeArray(i);
         });
+    }
 
+    private void eligeArray(int i) {
+        ArrayAdapter<CharSequence> adapter;
+        adapter = ArrayAdapter.createFromResource(this,idBtnArray(i),android.R.layout.simple_spinner_item);
+        ((Spinner) findViewById(R.id.sp_elementos)).setAdapter(adapter);
+    }
+
+    private int idBtnArray(int i) {
+
+        int array;
+        if(i == R.id.rb_opcion1){
+            array = R.array.Opciones1;
+        } else if (i == R.id.rb_opcion2) {
+            array = R.array.Opciones2;
+        }
+        else{
+            array = R.array.Opciones3;
+        }
+        return array;
     }
 }
